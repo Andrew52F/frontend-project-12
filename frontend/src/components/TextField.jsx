@@ -1,12 +1,13 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { FormGroup, FloatingLabel } from 'react-bootstrap';
 import { Field } from 'formik';
 
 function TextField(props) {
   const {
-    name, placeholder, error, handleChange, handleBlur, touched,
+    name, placeholder, error, errorMessage, handleChange, handleBlur, touched,
   } = props;
+  
   return (
     <FormGroup className='mb-3'>
       <FloatingLabel
@@ -15,7 +16,7 @@ function TextField(props) {
         className='mb-3'
       >
         <Field
-          className={`form-control ${error && touched[name] && 'is-invalid'}`}
+          className={`form-control ${error && touched && 'is-invalid'}`}
           name={name}
           id={name}
           type={name === 'password' || name === 'confirmPassword' ? 'password' : null}
@@ -24,9 +25,13 @@ function TextField(props) {
           onChange={handleChange}
           onBlur={handleBlur}
         />
-        {error && touched[name] && (<div className='invalid-tooltip'>{error}</div>) }
+        {error && touched && errorMessage && (<div className='invalid-tooltip'>{errorMessage}</div>) }
       </FloatingLabel>
     </FormGroup>
   );
 }
+TextField.defaultProps = {
+  focus: false
+};
+
 export default TextField;
