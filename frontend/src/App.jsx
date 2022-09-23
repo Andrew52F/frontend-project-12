@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth} from './components/providers/AuthProvider';
-import MainContainer from './components/mainContainer';
+import MainContainer from './components/MainContainer';
 import Login from './components/pages/Login';
 import Signup from './components/pages/Signup';
 import Chat from './components/pages/Chat';
