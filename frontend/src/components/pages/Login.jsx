@@ -1,8 +1,6 @@
-/* eslint-disable react/jsx-props-no-spreading */
-/* eslint-disable jsx-a11y/label-has-associated-control */
-import React from 'react';
-import axios from 'axios';
-import { object, string } from 'yup';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { object, string} from 'yup';
 import {
   Formik, Form,
 } from 'formik';
@@ -10,22 +8,41 @@ import {
   Container, Col, Card, Row,
 } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
-import loginAvatarImg from '../assets/loginAvatar.jpeg';
-import TextField from './TextField';
+import loginAvatarImg from '../../assets/loginAvatar.jpeg';
+import TextField from '../TextField';
+import { useAuth } from '../providers/AuthProvider';
 
-function Login() {
+const Login = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  const { onLogin } = useAuth();
+  const [ authError, setAuthError ] = useState();
+
   const initialValues = {
-    nickname: '',
+    username: '',
     password: '',
   };
   const validationSchema = object({
-    nickname: string().required(t('fieldErrors.field_is_required')).matches(/^[\S]{3,20}$/, t('fieldErrors.field_wrong_length')),
-    password: string().required(t('fieldErrors.field_is_required')).min(6, t('fieldErrors.field_too_short')),
+    username: string().required(t('fieldErrors.field_is_required')),
+    password: string().required(t('fieldErrors.field_is_required')),
   });
   const handleSubmit = async (values) => {
-    const response = await axios.post('/api/v1/login', values);
-    console.log(response);
+    console.log(values)
+    try {
+      await onLogin(values);
+      navigate('/');
+    }
+    catch (e) {
+      switch (Number(e.message)) {
+        case 0: setAuthError(t('auth_errors.connection'))
+        break;
+        case 401: setAuthError(t('auth_errors.unauthorized'))
+        break;
+        case 500: setAuthError(t('auth_errors.server_lost'))
+          break;
+        default: setAuthError(t('auth_errors.unknown'))
+      }
+    }
   }
 
   return (
@@ -54,20 +71,23 @@ function Login() {
                   errors, touched, handleChange, handleBlur,
                 }) => (
                   <Form className='col-12 col-md-6 mt-3 mt-mb-0'>
-                    <h1 className='text-center mb-4'>{t('authorization.log_in')}</h1>
+                    <h1 className='text-center mb-4'>{t('authorization.login')}</h1>
                     <TextField
-                      name='nickname'
-                      placeholder={t('placeholders.nickname_ph')}
-                      error={errors.nickname}
-                      touched={touched}
+                      name='username'
+                      placeholder={t('placeholders.username_ph')}
+                      // error и errorMessage разделены для изменения стиля инпута без появления текста ошибки для submit ошибок
+                      error={authError || errors.username}
+                      errorMessage={errors.username}
+                      touched={touched.username}
                       handleChange={handleChange}
                       handleBlur={handleBlur}
                     />
                     <TextField
                       name='password'
-                      placeholder='Пароль'
-                      error={errors.password}
-                      touched={touched}
+                      placeholder={t('placeholders.password_ph')}
+                      error={authError || errors.password}
+                      errorMessage={authError || errors.password}
+                      touched={touched.password}
                       handleChange={handleChange}
                       handleBlur={handleBlur}
                     />
@@ -75,7 +95,7 @@ function Login() {
                       className='w-100 mb-3 btn btn-outline-primary'
                       type='submit'
                     >
-                      {t('authorization.log_in')}
+                      {t('authorization.login')}
                     </button>
                   </Form>
                 )}
@@ -86,7 +106,7 @@ function Login() {
                 <span>
                   Нет аккаунта?
                   {' '}
-                  <a href='/signup'>Регистрация</a>
+                  <Link to={'/signup'}> Регистрация</Link>
                 </span>
               </div>
             </Card.Footer>

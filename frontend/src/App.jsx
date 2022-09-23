@@ -1,28 +1,42 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { I18nextProvider } from 'react-i18next';
-import Login from './components/Login';
-import NotFoundPage from './components/NotFoundPage';
-import i18n from './i18next';
-import AuthProvider from './components/AuthProvider';
-import Home from './components/Home';
-import Header from './components/Header';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { useAuth} from './components/providers/AuthProvider';
+import MainContainer from './components/mainContainer';
+import Login from './components/pages/Login';
+import Signup from './components/pages/Signup';
+import Chat from './components/pages/Chat';
+import NotFoundPage from './components/pages/NotFoundPage';
+import NavBar from './components/NavBar';
+import 'bootstrap/dist/css/bootstrap.css';
+import './index.css';
+import Providers from './init';
 
-function App() {
+const ProtectedRoute = ({ children }) => {
+  const {isLoggedIn} = useAuth();
+  return isLoggedIn ? children : <Navigate to={'/login'} />;
+};
 
-  return (
-    <I18nextProvider i18n={i18n}>
-      <AuthProvider>
-        <Header/>
-        <BrowserRouter>
-            <Routes>
-              <Route path='/' element={<Home />} />
-              <Route path='/login' element={<Login />} />
-              <Route path='*' element={<NotFoundPage />} />
-            </Routes>
-          </BrowserRouter>
-      </AuthProvider>
-    </I18nextProvider>
+
+const App = () => {
+
+  return (      
+  <Providers>
+    <MainContainer>
+      <NavBar/>
+      <BrowserRouter>
+       <Routes>
+          <Route path='/' element={
+            <ProtectedRoute>
+              <Chat />
+            </ProtectedRoute>
+          } />
+          <Route path='/login' element={<Login />} />
+          <Route path='/signup' element={<Signup />} />
+          <Route path='*' element={<NotFoundPage />} />
+        </Routes>
+      </BrowserRouter>
+    </MainContainer> 
+  </Providers>
   );
 }
 

@@ -1,9 +1,12 @@
 import React from 'react';
 import { Button, Container } from 'react-bootstrap';
 import Navbar from 'react-bootstrap/Navbar';
-import { useAuth } from './AuthProvider';
-const Header = () => {
-  const {authToken, onLogout} = useAuth();
+import { useAuth } from './providers/AuthProvider';
+import { useTranslation } from 'react-i18next';
+
+const NavBar = () => {
+  const { t } = useTranslation();
+  const {isLoggedIn, onLogout} = useAuth();
   return (
     <Navbar
       bg='white'
@@ -12,16 +15,16 @@ const Header = () => {
       className='shadow-sm'
     >
       <Container>
-      <Navbar.Brand>Hexlet Chat</Navbar.Brand>
-      {authToken && (
+      <Navbar.Brand href='/'>Hexlet Chat</Navbar.Brand>
+      {isLoggedIn && (
       <Button
         onClick={onLogout}
       >
-        Выйти
+        {t('authorization.logout')}
       </Button>
       )}
       </Container>
     </Navbar>
   )
 }
-export default Header;
+export default NavBar;

@@ -1,5 +1,5 @@
 import React from 'react';
-import nfAvatar from '../assets/nfAvatar.svg';
+import nfAvatar from '../../assets/nfAvatar.svg';
 
 function NotFoundPage() {
   return (

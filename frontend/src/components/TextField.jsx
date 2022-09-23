@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useRef, useEffect } from 'react';
+import React from 'react';
 import { FormGroup, FloatingLabel } from 'react-bootstrap';
 import { Field } from 'formik';
 
@@ -19,7 +19,7 @@ function TextField(props) {
           className={`form-control ${error && touched && 'is-invalid'}`}
           name={name}
           id={name}
-          type={name === 'password' || name === 'confirmPassword' ? 'password' : null}
+          type={name === 'password' || name === 'passwordConfirmation' ? 'password' : null}
           required
           placeholder='ник'
           onChange={handleChange}

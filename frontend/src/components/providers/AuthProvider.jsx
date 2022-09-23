@@ -4,34 +4,45 @@ import axios from 'axios';
 const AuthContext = createContext(null);
 
 const AuthProvider = ({children}) => {
-  const [ authToken , setAuthToken ] = useState(localStorage.getItem('authtoken') || null);
+  const authData = JSON.parse(localStorage.getItem('authtoken'));
+  const [ isLoggedIn , setLoggedIn ] = useState(!!authData?.token);
 
-  const onLogin = async (values) => {
+  const onAuth = async (values, type) => {
     try {
-      const response = await axios.post('/api/v1/login', values);
-      const authToken = response.data.token;
+      const response = await axios.post(`/api/v1/${type}`, values);
+      const authData = response.data;
       const status = response.status;
-      localStorage.setItem('authtoken', authToken);
-      setAuthToken(authToken);
+      localStorage.setItem('authtoken', JSON.stringify({token: authData.token, username: authData.username}));
+      setLoggedIn(true);
       console.log(`Auth success! Status:${status}`)
       return {
         status: status,
-        response: response,
       }
     }
     catch(e) {
       const errorCode = e.response.status;
+      console.log(values);
       console.error(`Auth error. Status: ${ errorCode }`);
       throw new Error(errorCode)
     }
   }
+  const onLogin = async (values) => await onAuth(values, 'login');
+  const onSignup = async (values) => await onAuth(values, 'signup');
+
+
   const onLogout = () => {
     localStorage.removeItem('authtoken');
-    setAuthToken(null);
+    setLoggedIn(false);
   }
+  const getAuthHeader = () => (isLoggedIn
+    ? { Authorization: `Bearer ${authData.token}` }
+    : {});
+  
   const value = {
-    authToken,
+    isLoggedIn,
+    getAuthHeader,
     onLogin,
+    onSignup,
     onLogout
   }
   return (
