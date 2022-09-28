@@ -1,5 +1,6 @@
 import { createSlice, createEntityAdapter } from '@reduxjs/toolkit'
 import { fetchData } from './channelsSlice';
+import { actions as channelsActions } from './channelsSlice'
 
 const messagesAdapter = createEntityAdapter();
 
@@ -15,6 +16,11 @@ const messagesSlice = createSlice({
       .addCase(fetchData.fulfilled, (state, { payload }) => {
         const { messages } = payload;
         messagesAdapter.addMany(state, messages);
+      })
+      .addCase(channelsActions.removeChannel, (state, { payload }) => {
+        const remainingMessages = Object.values(state.entities).filter(({channelId}) => channelId !== payload)
+        console.log(remainingMessages);
+        messagesAdapter.setAll(state, remainingMessages); 
       })
   }
 })

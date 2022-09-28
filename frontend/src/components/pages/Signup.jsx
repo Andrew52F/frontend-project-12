@@ -24,9 +24,9 @@ const Signup = () => {
     passwordConfirmation: ''
   };
   const validationSchema = object({
-    username: string().required(t('field_errors.field_is_required')).matches(/^[\S]{3,20}$/, t('field_errors.field_wrong_length')),
-    password: string().required(t('field_errors.field_is_required')).min(6, t('field_errors.field_too_short')),
-    passwordConfirmation: string().oneOf([ref('password'), null], t('field_errors.passwords_must_match')),
+    username: string().required(t('validation_errors.is_required')).matches(/^[\S]{3,20}$/, t('validation_errors.wrong_length')),
+    password: string().required(t('validation_errors.is_required')).min(6, t('validation_errors.too_short')),
+    passwordConfirmation: string().oneOf([ref('password'), null], t('validation_errors.passwords_must_match')),
   });
   const handleSubmit = async ({passwordConfirmation, ...values}) => {
     try {

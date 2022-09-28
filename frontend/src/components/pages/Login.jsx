@@ -1,12 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { object, string} from 'yup';
-import {
-  Formik, Form,
-} from 'formik';
-import {
-  Container, Col, Card, Row,
-} from 'react-bootstrap';
+import { Formik, Form } from 'formik';
+import { Container, Col, Card, Row } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import loginAvatarImg from '../../assets/loginAvatar.jpeg';
 import TextField from '../TextField';
@@ -23,8 +19,8 @@ const Login = () => {
     password: '',
   };
   const validationSchema = object({
-    username: string().required(t('fieldErrors.field_is_required')),
-    password: string().required(t('fieldErrors.field_is_required')),
+    username: string().required(t('validation_errors.is_required')),
+    password: string().required(t('validation_errors.is_required')),
   });
   const handleSubmit = async (values) => {
     console.log(values)

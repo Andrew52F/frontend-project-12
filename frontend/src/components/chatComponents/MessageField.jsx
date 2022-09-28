@@ -34,7 +34,6 @@ const MessageField = () => {
   });
 
   return (
-    <div className="mt-auto px-5 py-3">
       <Form
         noValidate
         className="py-1 border rounded-2"
@@ -69,7 +68,6 @@ const MessageField = () => {
           </Button>
         </Form.Group>
       </Form>
-    </div>
   );
 };
 

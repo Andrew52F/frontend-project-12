@@ -1,5 +1,5 @@
 import { createSlice, createEntityAdapter, createAsyncThunk } from '@reduxjs/toolkit'
-import axios from 'axios'
+import axios from 'axios';
 
 export const fetchData = createAsyncThunk( 'channels/fetchData', async (getAuthHeader, {rejectWithValue}) => {
   try {
@@ -27,6 +27,12 @@ const channelsSlice = createSlice({
     addChannels: channelsAdapter.addMany,
     removeChannel: channelsAdapter.removeOne,
     updateChannel: channelsAdapter.updateOne,
+    setDefaultChannelId: (state, {payload}) => {
+      console.log(`${payload} ${state.currentChannelId}`)
+      if (payload === state.currentChannelId) {
+        state.currentChannelId = 1;
+      }
+    },
     setCurrentChannelId: (state, {payload}) => {
       state.currentChannelId = payload;
     }

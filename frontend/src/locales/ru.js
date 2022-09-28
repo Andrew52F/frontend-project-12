@@ -1,5 +1,21 @@
 export default {
   translation: {
+    modals: {
+      headers: {
+        add: 'Добавить канал',
+        remove: 'Удалить канал',
+        rename: 'Переименовать канал'
+      },
+      body: {
+        confirmation: 'Уверены?',
+      },
+      buttons: {
+        send: 'Отправить',
+        decline: 'Отклонить',
+        remove: 'Удалить',
+        rename: 'Переименовать',
+      }
+    },
     chat: {
       channels: 'Каналы',
       number_of_messages: '{{count}} сообщений',
@@ -24,12 +40,14 @@ export default {
       server_lost: 'Сервер не отвечает',
       unknown: 'Неизвестная ошибка',
     },
-    field_errors: {
-      field_wrong_length: 'От 3 до 20 символов',
-      field_too_short: 'Не менее 6 символов',
+    validation_errors: {
+      wrong_length: 'От 3 до 20 символов',
+      too_short: 'Не менее 6 символов',
       passwords_must_match: 'Пароли должны совпадать',
-      field_too_big: 'Длинное поле',
-      field_is_required: 'Обязательное поле',
+      too_big: 'Длинное поле',
+      is_required: 'Обязательное поле',
+      has_to_be_unique: 'Долдно быть уникальным',
+
     },
   },
   new_message: 'Новое сообщение',
