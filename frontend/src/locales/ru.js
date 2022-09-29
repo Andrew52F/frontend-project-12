@@ -21,6 +21,15 @@ export default {
       number_of_messages: '{{count}} сообщений',
       new_message: 'Новое сообщение',
     },
+    toast_messages: {
+      channel_added: 'Канал создан',
+      channel_renamed: 'Канал переименован',
+      channel_deleted: 'Канал удален',
+      connection: 'Потеряно интернет соединение',
+      server_lost: 'Сервер не отвечает',
+      unknown: 'Неизвестная ошибка',
+
+    },
     authorization: {
       login: 'Войти',
       signup: 'Регистрация',
@@ -36,9 +45,6 @@ export default {
     auth_errors: {
       unauthorized: 'Неверные имя пользователя или пароль',
       user_exist: 'Пользователь с этими данными уже существует',
-      connection: 'Потеряно интернет соединение',
-      server_lost: 'Сервер не отвечает',
-      unknown: 'Неизвестная ошибка',
     },
     validation_errors: {
       wrong_length: 'От 3 до 20 символов',

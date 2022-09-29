@@ -4,11 +4,12 @@ import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { getModalChannel } from '../../slices/selectors';
 import { useChatApi } from '../providers/ChatApiProvider';
+import { toast } from 'react-toastify';
 
 const DeleteChannel = ({onHide}) => {
   const { t } = useTranslation();
   const { deleteChannel } = useChatApi();
-  const {id} = useSelector(getModalChannel)
+  const {id} = useSelector(getModalChannel);
 
   return (
     <>
@@ -36,6 +37,7 @@ const DeleteChannel = ({onHide}) => {
                 deleteChannel(id, () => {
                   onHide()
                 });
+                toast.success(t('toast_messages.channel_deleted'))
               }}
             >
               {t('modals.buttons.remove')}

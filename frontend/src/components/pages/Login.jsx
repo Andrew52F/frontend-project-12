@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 import loginAvatarImg from '../../assets/loginAvatar.jpeg';
 import TextField from '../TextField';
 import { useAuth } from '../providers/AuthProvider';
+import { toast } from 'react-toastify';
 
 const Login = () => {
   const { t } = useTranslation();
@@ -30,13 +31,13 @@ const Login = () => {
     }
     catch (e) {
       switch (Number(e.message)) {
-        case 0: setAuthError(t('auth_errors.connection'))
-        break;
         case 401: setAuthError(t('auth_errors.unauthorized'))
         break;
-        case 500: setAuthError(t('auth_errors.server_lost'))
-          break;
-        default: setAuthError(t('auth_errors.unknown'))
+        case 500: toast.error(t('toast_messages.server_lost'))
+        break;
+        case 0: toast.error(t('toast_messages.connection'))
+        break;
+        default: toast.error(t('toast_messages.unknown'))
       }
     }
   }

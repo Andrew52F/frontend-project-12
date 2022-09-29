@@ -6,6 +6,9 @@ import { getAllChannels, getCurrentChannelId } from '../../slices/selectors';
 import { PlusSquare} from 'react-bootstrap-icons';
 import { actions } from '../../slices/channelsSlice';
 import { openModal } from '../../slices/modalsSlice';
+import  filter from 'leo-profanity';
+
+filter.add(filter.getDictionary('ru'))
 
 const ChannelsList = () => {
   const dispatch = useDispatch();
@@ -39,6 +42,7 @@ const ChannelsList = () => {
         {channels && currentChannelId && (
           channels.map(({id, name, removable}) => {
             const variant = id === currentChannelId ? 'secondary' : 'light'
+            const filteredName = filter.clean(name);
             return (removable) ? (
               <Nav.Item key={id} className="w-100">
                 <Dropdown
@@ -50,8 +54,7 @@ const ChannelsList = () => {
                   className="w-100 rounded-0 text-start text-truncate"
                   onClick={() => {dispatch(actions.setCurrentChannelId(id))}}
                 >
-                  <span className="me-1">#</span>
-                  {name}
+                  <span className="me-1">#</span>{filteredName}
                 </Button>
                   <Dropdown.Toggle
                   variant={variant}
@@ -77,7 +80,7 @@ const ChannelsList = () => {
                   className='w-100 rounded-0 text-start text-truncate'
                   onClick={() => {dispatch(actions.setCurrentChannelId(id))}}
                 >
-                  <span className='me-1'>#</span>{name}
+                  <span className='me-1'>#</span>{filteredName}
                 </Button>
               </Nav.Item>
           )

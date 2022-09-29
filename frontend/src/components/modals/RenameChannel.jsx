@@ -6,6 +6,7 @@ import { useFormik} from 'formik';
 import { useSelector } from 'react-redux';
 import { getAllChannels, getModalChannel } from '../../slices/selectors';
 import { useChatApi } from '../providers/ChatApiProvider';
+import { toast } from 'react-toastify';
 
 const RenameChannel = ({onHide}) => {
   const { t } = useTranslation();
@@ -35,6 +36,7 @@ const RenameChannel = ({onHide}) => {
         formik.resetForm();
         onHide();
       });
+      toast.success(t('toast_messages.channel_renamed'))
     },
     validateOnChange: false,
     validateOnBlur: false,

@@ -10,6 +10,8 @@ import NavBar from './components/NavBar';
 import 'bootstrap/dist/css/bootstrap.css';
 import './index.css';
 import Providers from './init';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ProtectedRoute = ({ children }) => {
   const {isLoggedIn} = useAuth();
@@ -35,6 +37,7 @@ const App = () => {
           <Route path='*' element={<NotFoundPage />} />
         </Routes>
       </BrowserRouter>
+      <ToastContainer />
     </MainContainer> 
   </Providers>
   );
