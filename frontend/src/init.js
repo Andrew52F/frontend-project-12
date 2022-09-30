@@ -7,6 +7,8 @@ import ChatApiProvider from './components/providers/ChatApiProvider';
 import resources from './locales/index';
 import store from './slices/index';
 import initSocket from './websocket';
+import Rollbar from 'rollbar';
+import { Provider as RollbarProvider } from '@rollbar/react';
 
 
 
@@ -20,16 +22,30 @@ const Providers = ({children}) => {
   });
   const api = initSocket();
 
+  const rollbarConfig = {
+    accessToken: '9564894f8c69445b9ec982a1a26e88c7',
+    environment: 'production',
+    captureUncaught: true,
+    captureUnhandledRejections: true,
+    payload: {
+      environment: 'production',
+    },
+  };
+  
+  const rollbar = new Rollbar(rollbarConfig);
+
   return (
-    <I18nextProvider i18n={i18n}>
-      <Provider store={store}>
-        <AuthProvider>
-          <ChatApiProvider api={api}>
-            { children }
-          </ChatApiProvider>
-        </AuthProvider>
-      </Provider>
-    </I18nextProvider>
+    <RollbarProvider instance={rollbar} >
+      <I18nextProvider i18n={i18n}>
+        <Provider store={store}>
+          <AuthProvider>
+            <ChatApiProvider api={api}>
+              { children }
+            </ChatApiProvider>
+          </AuthProvider>
+        </Provider>
+      </I18nextProvider>
+    </RollbarProvider>
   )
 }
 
