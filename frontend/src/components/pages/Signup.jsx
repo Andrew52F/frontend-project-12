@@ -78,7 +78,7 @@ const Signup = () => {
                     <h1 className='text-center mb-4'>{t('authorization.signup')}</h1>
                     <TextField
                       name='username'
-                      placeholder={t('placeholders.username_ph')}
+                      placeholder={t('placeholders.username_reg_ph')}
                       error={authError || errors.username}
                       errorMessage={errors.username}
                       touched={touched.username}
@@ -96,7 +96,7 @@ const Signup = () => {
                     />
                     <TextField
                       name='passwordConfirmation'
-                      placeholder={t('placeholders.passwordConfirmation_ph')}
+                      placeholder={t('placeholders.password_сonfirmation_ph')}
                       error={authError || errors.passwordConfirmation}
                       errorMessage={authError || errors.passwordConfirmation}
                       touched={touched.passwordConfirmation}

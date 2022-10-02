@@ -38,8 +38,9 @@ export default {
     },
     placeholders: {
       username_ph: 'Ваш ник',
+      username_reg_ph: 'Имя пользователя',
       password_ph: 'Пароль',
-      passwordConfirmation_ph: 'Подтвердите пароль',
+      password_сonfirmation_ph: 'Подтвердите пароль',
       type_message: 'Введите сообщение...',
     },
     auth_errors: {
