@@ -4,7 +4,7 @@ export default {
       headers: {
         add: 'Добавить канал',
         remove: 'Удалить канал',
-        rename: 'Переименовать канал',
+        rename: 'Переименовать канал'
       },
       body: {
         confirmation: 'Уверены?',
@@ -14,7 +14,7 @@ export default {
         decline: 'Отклонить',
         remove: 'Удалить',
         rename: 'Переименовать',
-      },
+      }
     },
     chat: {
       channels: 'Каналы',
@@ -59,7 +59,7 @@ export default {
       go_to_main_page: {
         text: 'Но вы можете перейти',
         link: 'на главную страницу',
-      },
-    },
+      }
+  },
   },
 };

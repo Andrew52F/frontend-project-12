@@ -1,17 +1,17 @@
 import React, { useEffect, useRef } from 'react';
-import { Modal, Button, Form } from 'react-bootstrap';
+import { Modal, Button, Form} from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import * as yup from 'yup';
-import { useFormik } from 'formik';
+import { useFormik} from 'formik';
 import { useSelector } from 'react-redux';
-import { toast } from 'react-toastify';
 import { getAllChannels, getModalChannel } from '../../slices/selectors';
 import { useChatApi } from '../providers/ChatApiProvider';
+import { toast } from 'react-toastify';
 
-function RenameChannel({ onHide }) {
+const RenameChannel = ({onHide}) => {
   const { t } = useTranslation();
-  const existingChannelsNames = useSelector(getAllChannels).map(({ name }) => name);
-  const { id, initialName } = useSelector(getModalChannel);
+  const existingChannelsNames = useSelector(getAllChannels).map(({name}) => name);
+  const {id, initialName} = useSelector(getModalChannel)
   const { updateChannelName } = useChatApi();
 
   const inputRef = useRef(null);
@@ -32,49 +32,50 @@ function RenameChannel({ onHide }) {
     initialValues: { name: initialName },
     validationSchema,
     onSubmit: ({ name }) => {
-      updateChannelName({ name, id }, () => {
+      updateChannelName({name, id}, () => {
         formik.resetForm();
         onHide();
       });
-      toast.success(t('toast_messages.channel_renamed'));
+      toast.success(t('toast_messages.channel_renamed'))
     },
     validateOnChange: false,
     validateOnBlur: false,
   });
 
+
   return (
     <>
       <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
-          {t('modals.headers.rename')}
-        </Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <Form onSubmit={formik.handleSubmit}>
-          <Form.Group>
-            <Form.Control
-              className="mb-2"
-              ref={inputRef}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.name}
-              isInvalid={!!formik.errors.name}
-              id="name"
-              name="name"
-            />
-            <Form.Label
-              htmlFor="name"
-              className="visually-hidden"
-            >
-              {t('modals.add.channelName')}
-            </Form.Label>
-            <Form.Control.Feedback
-              type="invalid"
-            >
-              {t(formik.errors.name)}
-            </Form.Control.Feedback>
-            <div className="d-flex justify-content-end">
-              <Button
+          <Modal.Title id="contained-modal-title-vcenter">
+            {t('modals.headers.rename')}
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form onSubmit={formik.handleSubmit}>
+            <Form.Group>
+              <Form.Control
+                className="mb-2"
+                ref={inputRef}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.name}
+                isInvalid={!!formik.errors.name}
+                id="name"
+                name="name"
+              />
+              <Form.Label
+                htmlFor="name"
+                className="visually-hidden"
+              >
+                {t('modals.add.channelName')}
+              </Form.Label>
+              <Form.Control.Feedback
+                type="invalid"
+              >
+                {t(formik.errors.name)}
+              </Form.Control.Feedback>
+              <div className='d-flex justify-content-end'>
+                <Button
                 variant="secondary"
                 type="button"
                 className="me-2"
@@ -89,11 +90,11 @@ function RenameChannel({ onHide }) {
               >
                 {t('modals.buttons.send')}
               </Button>
-            </div>
-          </Form.Group>
-        </Form>
-      </Modal.Body>
+              </div>
+            </Form.Group>
+          </Form>
+        </Modal.Body>
     </>
-  );
+  )
 }
 export default RenameChannel;

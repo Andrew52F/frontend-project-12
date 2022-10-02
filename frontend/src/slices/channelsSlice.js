@@ -1,22 +1,23 @@
-import { createSlice, createEntityAdapter, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createEntityAdapter, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios';
 
-export const fetchData = createAsyncThunk('channels/fetchData', async (getAuthHeader, { rejectWithValue }) => {
+export const fetchData = createAsyncThunk( 'channels/fetchData', async (getAuthHeader, {rejectWithValue}) => {
   try {
-    const { data } = await axios.get('/api/v1/data', { headers: getAuthHeader() });
+    const { data } = await axios.get('/api/v1/data', { headers: getAuthHeader()});
     return data;
   } catch (e) {
-    return rejectWithValue('Data not found');
+    return rejectWithValue('Data not found')
   }
-});
+})
+
 
 const channelsAdapter = createEntityAdapter();
 
 const initialState = channelsAdapter.getInitialState({
   currentChannelId: null,
   channelsState: null,
-  error: null,
-});
+  error: null
+})
 
 const channelsSlice = createSlice({
   name: 'channels',
@@ -26,14 +27,15 @@ const channelsSlice = createSlice({
     addChannels: channelsAdapter.addMany,
     removeChannel: channelsAdapter.removeOne,
     updateChannel: channelsAdapter.updateOne,
-    setDefaultChannelId: (state, { payload }) => {
+    setDefaultChannelId: (state, {payload}) => {
+      console.log(`${payload} ${state.currentChannelId}`)
       if (payload === state.currentChannelId) {
         state.currentChannelId = 1;
       }
     },
-    setCurrentChannelId: (state, { payload }) => {
+    setCurrentChannelId: (state, {payload}) => {
       state.currentChannelId = payload;
-    },
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -41,19 +43,19 @@ const channelsSlice = createSlice({
         state.channelsState = 'loading';
         state.error = null;
       })
-      .addCase(fetchData.fulfilled, (state, { payload }) => {
+      .addCase(fetchData.fulfilled, (state, {payload}) => {
         const { channels, currentChannelId } = payload;
         channelsAdapter.addMany(state, channels);
         state.currentChannelId = currentChannelId;
         state.channelsState = 'idle';
         state.error = null;
       })
-      .addCase(fetchData.rejected, (state, { payload }) => {
+      .addCase(fetchData.rejected, (state, {payload}) => {
         state.channelsState = 'failed';
         state.error = payload;
-      });
-  },
-});
+      })
+  }
+})
 export const { actions } = channelsSlice;
 export const selectors = channelsAdapter.getSelectors((state) => state.channels);
 export default channelsSlice.reducer;

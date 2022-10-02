@@ -1,53 +1,58 @@
-import React, { useState, createContext, useMemo } from 'react';
+import React, { useState, createContext} from 'react';
 import axios from 'axios';
 
 const AuthContext = createContext(null);
 
-function AuthProvider({ children }) {
+const AuthProvider = ({children}) => {
   const authData = JSON.parse(localStorage.getItem('authtoken'));
-  const [isLoggedIn, setLoggedIn] = useState(!!authData?.token);
+  const [ isLoggedIn , setLoggedIn ] = useState(!!authData?.token);
 
   const onAuth = async (values, type) => {
     try {
       const response = await axios.post(`/api/v1/${type}`, values);
-      const authDat = response.data;
-      const { status } = response;
-      localStorage.setItem('authtoken', JSON.stringify({ token: authDat.token, username: authDat.username }));
+      const authData = response.data;
+      const status = response.status;
+      localStorage.setItem('authtoken', JSON.stringify({token: authData.token, username: authData.username}));
       setLoggedIn(true);
-      console.log(`Auth success! Status:${status}`);
+      console.log(`Auth success! Status:${status}`)
       return {
-        status,
-      };
-    } catch (e) {
+        status: status,
+      }
+    }
+    catch(e) {
       const errorCode = e.response.status;
       console.log(values);
-      console.error(`Auth error. Status: ${errorCode}`);
-      throw new Error(errorCode);
+      console.error(`Auth error. Status: ${ errorCode }`);
+      throw new Error(errorCode)
     }
-  };
-  const onLogin = async (values) => onAuth(values, 'login');
-  const onSignup = async (values) => onAuth(values, 'signup');
+  }
+  const onLogin = async (values) => await onAuth(values, 'login');
+  const onSignup = async (values) => await onAuth(values, 'signup');
+
 
   const onLogout = () => {
     localStorage.removeItem('authtoken');
     setLoggedIn(false);
-  };
+  }
   const getAuthHeader = () => (isLoggedIn
     ? { Authorization: `Bearer ${authData.token}` }
     : {});
-  const value = useMemo(() => ({
+  
+  const value = {
     isLoggedIn,
     getAuthHeader,
     onLogin,
     onSignup,
-    onLogout,
-  }), []);
+    onLogout
+  }
   return (
     <AuthContext.Provider value={value}>
       {children}
     </AuthContext.Provider>
-  );
+  )
 }
-export const useAuth = () => React.useContext(AuthContext);
+export const useAuth = () => {
+  return React.useContext(AuthContext);
+};
 
 export default AuthProvider;
