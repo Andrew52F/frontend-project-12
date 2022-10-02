@@ -7,7 +7,6 @@ import ChatApiProvider from './components/providers/ChatApiProvider';
 import resources from './locales/index';
 import store from './slices/index';
 import initSocket from './websocket';
-import Rollbar from 'rollbar';
 import { Provider as RollbarProvider } from '@rollbar/react';
 
 

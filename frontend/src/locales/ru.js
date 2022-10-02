@@ -53,8 +53,13 @@ export default {
       too_big: 'Длинное поле',
       is_required: 'Обязательное поле',
       has_to_be_unique: 'Долдно быть уникальным',
-
     },
+    nf_page: {
+      page_nf: 'Страница не найдена',
+      go_to_main_page: {
+        text: 'Но вы можете перейти',
+        link: 'на главную страницу',
+      }
   },
-  new_message: 'Новое сообщение',
+  },
 };
