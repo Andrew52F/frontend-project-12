@@ -1,26 +1,15 @@
 import React, { useContext, createContext } from 'react';
 
 const ChatApiContext = createContext();
-export const useChatApi = () => useContext(ChatApiContext)
+export const useChatApi = () => useContext(ChatApiContext);
 
-const ChatApiProvider = ({ api, children }) => {
-  const {
-    sendMessage,
-    createNewChannel,
-    updateChannelName,
-    deleteChannel
-  } = api;
+function ChatApiProvider({ api, children }) {
   return (
     <ChatApiContext.Provider
-      value={{
-        sendMessage,
-        createNewChannel,
-        updateChannelName,
-        deleteChannel
-      }}
+      value={api}
     >
       { children }
     </ChatApiContext.Provider>
-  )
+  );
 }
 export default ChatApiProvider;

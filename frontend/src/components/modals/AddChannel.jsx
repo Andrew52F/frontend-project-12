@@ -1,16 +1,16 @@
 import React, { useEffect, useRef } from 'react';
-import { Modal, Button, Form} from 'react-bootstrap';
+import { Modal, Button, Form } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import * as yup from 'yup';
-import { useFormik} from 'formik';
+import { useFormik } from 'formik';
 import { useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 import { getAllChannels } from '../../slices/selectors';
 import { useChatApi } from '../providers/ChatApiProvider';
-import { toast } from 'react-toastify';
 
-const AddChannel = ({onHide}) => {
+function AddChannel({ onHide }) {
   const { t } = useTranslation();
-  const existingChannelsNames = useSelector(getAllChannels).map(({name}) => name);
+  const existingChannelsNames = useSelector(getAllChannels).map(({ name }) => name);
   const { createNewChannel } = useChatApi();
 
   const inputRef = useRef(null);
@@ -35,46 +35,45 @@ const AddChannel = ({onHide}) => {
         formik.resetForm();
         onHide();
       });
-      toast.success(t('toast_messages.channel_added'))
+      toast.success(t('toast_messages.channel_added'));
     },
     validateOnChange: false,
     validateOnBlur: false,
   });
 
-
   return (
     <>
       <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
-            {t('modals.headers.add')}
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form onSubmit={formik.handleSubmit}>
-            <Form.Group>
-              <Form.Control
-                className="mb-2"
-                ref={inputRef}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.name}
-                isInvalid={!!formik.errors.name}
-                id="name"
-                name="name"
-              />
-              <Form.Label
-                htmlFor="name"
-                className="visually-hidden"
-              >
-                {t('modals.add.channelName')}
-              </Form.Label>
-              <Form.Control.Feedback
-                type="invalid"
-              >
-                {t(formik.errors.name)}
-              </Form.Control.Feedback>
-              <div className='d-flex justify-content-end'>
-                <Button
+        <Modal.Title id="contained-modal-title-vcenter">
+          {t('modals.headers.add')}
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <Form onSubmit={formik.handleSubmit}>
+          <Form.Group>
+            <Form.Control
+              className="mb-2"
+              ref={inputRef}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.name}
+              isInvalid={!!formik.errors.name}
+              id="name"
+              name="name"
+            />
+            <Form.Label
+              htmlFor="name"
+              className="visually-hidden"
+            >
+              {t('modals.add.channelName')}
+            </Form.Label>
+            <Form.Control.Feedback
+              type="invalid"
+            >
+              {t(formik.errors.name)}
+            </Form.Control.Feedback>
+            <div className="d-flex justify-content-end">
+              <Button
                 variant="secondary"
                 type="button"
                 className="me-2"
@@ -89,11 +88,11 @@ const AddChannel = ({onHide}) => {
               >
                 {t('modals.buttons.send')}
               </Button>
-              </div>
-            </Form.Group>
-          </Form>
-        </Modal.Body>
+            </div>
+          </Form.Group>
+        </Form>
+      </Modal.Body>
     </>
-  )
+  );
 }
 export default AddChannel;

@@ -7,13 +7,13 @@ function TextField(props) {
   const {
     name, placeholder, error, errorMessage, handleChange, handleBlur, touched,
   } = props;
-  
+
   return (
-    <FormGroup className='mb-3'>
+    <FormGroup className="mb-3">
       <FloatingLabel
-        controlId='nickname'
+        controlId="nickname"
         label={placeholder}
-        className='mb-3'
+        className="mb-3"
       >
         <Field
           className={`form-control ${error && touched && 'is-invalid'}`}
@@ -21,17 +21,17 @@ function TextField(props) {
           id={name}
           type={name === 'password' || name === 'passwordConfirmation' ? 'password' : null}
           required
-          placeholder='ник'
+          placeholder="ник"
           onChange={handleChange}
           onBlur={handleBlur}
         />
-        {error && touched && errorMessage && (<div className='invalid-tooltip'>{errorMessage}</div>) }
+        {error && touched && errorMessage && (<div className="invalid-tooltip">{errorMessage}</div>) }
       </FloatingLabel>
     </FormGroup>
   );
 }
 TextField.defaultProps = {
-  focus: false
+  focus: false,
 };
 
 export default TextField;
