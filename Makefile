@@ -11,7 +11,7 @@ start-backend:
 	npx start-server -p 5001
 
 start:
-	make start-backend & make start-frontend
+	npm start
 
 deploy:
 	git push heroku main
