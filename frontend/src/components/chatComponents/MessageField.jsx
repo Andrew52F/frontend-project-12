@@ -46,10 +46,10 @@ const MessageField = () => {
             name="body"
             id="body"
             type="text"
-            aria-label={t('ariaLabel')}
             ref={inputRef}
             className="border-0 p-0 ps-2"
             placeholder={t('placeholders.type_message')}
+            aria-label={t('chat.new_message')}
           />
           <Form.Label
             htmlFor="body"
