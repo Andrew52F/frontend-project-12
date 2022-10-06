@@ -77,7 +77,7 @@ const Signup = () => {
                 onSubmit={handleSubmit}
               >
                 {({
-                  errors, touched, handleChange, handleBlur,
+                  values, errors, touched, handleChange, handleBlur,
                 }) => (
                   <Form className='col-12 col-md-6 mt-3 mt-mb-0'>
                     <h1 className='text-center mb-4'>{t('authorization.signup')}</h1>
@@ -87,6 +87,7 @@ const Signup = () => {
                       placeholder={t('placeholders.username_reg_ph')}
                       error={authError || errors.username}
                       errorMessage={errors.username}
+                      value={values.username}
                       touched={touched.username}
                       handleChange={handleChange}
                       handleBlur={handleBlur}
@@ -96,6 +97,7 @@ const Signup = () => {
                       placeholder={t('placeholders.password_ph')}
                       error={authError || errors.password}
                       errorMessage={authError || errors.password}
+                      value={values.password}
                       touched={touched.password}
                       handleChange={handleChange}
                       handleBlur={handleBlur}
@@ -105,6 +107,7 @@ const Signup = () => {
                       placeholder={t('placeholders.password_сonfirmation_ph')}
                       error={authError || errors.passwordConfirmation}
                       errorMessage={authError || errors.passwordConfirmation}
+                      value={values.passwordConfirmation}
                       touched={touched.passwordConfirmation}
                       handleChange={handleChange}
                       handleBlur={handleBlur}

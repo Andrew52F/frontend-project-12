@@ -70,7 +70,7 @@ const Login = () => {
                 onSubmit={handleSubmit}
               >
                 {({
-                  errors, touched, handleChange, handleBlur,
+                  values, errors, touched, handleChange, handleBlur,
                 }) => (
                   <Form className='col-12 col-md-6 mt-3 mt-mb-0'>
                     <h1 className='text-center mb-4'>{t('authorization.login')}</h1>
@@ -78,6 +78,7 @@ const Login = () => {
                       ref={firstInput}
                       name='username'
                       placeholder={t('placeholders.username_ph')}
+                      value={values.username}
                       // error и errorMessage разделены для изменения стиля инпута без появления текста ошибки для submit ошибок
                       error={authError || errors.username}
                       errorMessage={errors.username}
@@ -88,6 +89,7 @@ const Login = () => {
                     <TextField
                       name='password'
                       placeholder={t('placeholders.password_ph')}
+                      value={values.password}
                       error={authError || errors.password}
                       errorMessage={authError || errors.password}
                       touched={touched.password}

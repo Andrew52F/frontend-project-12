@@ -4,7 +4,7 @@ import { FormGroup, FloatingLabel, Form } from 'react-bootstrap';
 
 function TextField(props, ref) {
   const {
-    name, placeholder, error, errorMessage, handleChange, handleBlur, touched,
+    name, value, placeholder, error, errorMessage, handleChange, handleBlur, touched,
   } = props;
   
   return (
@@ -19,6 +19,7 @@ function TextField(props, ref) {
           className={`form-control ${error && touched && 'is-invalid'}`}
           name={name}
           id={name}
+          value={value}
           type={name === 'password' || name === 'passwordConfirmation' ? 'password' : null}
           required
           placeholder='ник'
