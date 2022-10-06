@@ -67,7 +67,7 @@ const RenameChannel = ({onHide}) => {
                 htmlFor="name"
                 className="visually-hidden"
               >
-                {t('modals.add.channelName')}
+                {t('modals.body.channel_name_label')}
               </Form.Label>
               <Form.Control.Feedback
                 type="invalid"
