@@ -24,8 +24,5 @@
   "homepage": "https://github.com/Andrew52F/frontend-project-12#readme",
   "dependencies": {
     "@hexlet/chat-server": "^1.1.6"
-  },
-  "devDependencies": {
-    "@playwright/test": "^1.26.1"
   }
 }

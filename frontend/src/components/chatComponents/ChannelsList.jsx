@@ -58,9 +58,7 @@ const ChannelsList = () => {
                 </Button>
                   <Dropdown.Toggle
                   variant={variant}
-                  >
-                    <span className='visually-hidden'>{t('modals.buttons.controle_channel')}</span>
-                  </Dropdown.Toggle>
+                  />
                   <Dropdown.Menu>
                     <Dropdown.Item
                       onClick={showModal('rename', id)}

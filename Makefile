@@ -18,5 +18,3 @@ deploy:
 
 lint-frontend:
 	make -C frontend lint
-test-e2e:
-	make start & npx playwright test --trace on

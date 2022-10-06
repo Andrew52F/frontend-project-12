@@ -10,7 +10,7 @@ function TextField(props, ref) {
   return (
     <FormGroup className='mb-3'>
       <FloatingLabel
-        controlId={name}
+        controlId='nickname'
         label={placeholder}
         className='mb-3'
       >

@@ -8,14 +8,12 @@ export default {
       },
       body: {
         confirmation: 'Уверены?',
-        channel_name_label: 'Имя канала'
       },
       buttons: {
         send: 'Отправить',
         decline: 'Отклонить',
         remove: 'Удалить',
         rename: 'Переименовать',
-        controle_channel: 'Управление каналом'
       }
     },
     chat: {
@@ -26,7 +24,7 @@ export default {
     toast_messages: {
       channel_added: 'Канал создан',
       channel_renamed: 'Канал переименован',
-      channel_deleted: 'Канал удалён',
+      channel_deleted: 'Канал удален',
       connection: 'Потеряно интернет соединение',
       server_lost: 'Сервер не отвечает',
       unknown: 'Неизвестная ошибка',
