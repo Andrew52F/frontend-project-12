@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { object, string} from 'yup';
 import { Formik, Form } from 'formik';
@@ -14,6 +14,11 @@ const Login = () => {
   const navigate = useNavigate();
   const { onLogin } = useAuth();
   const [ authError, setAuthError ] = useState();
+
+  const firstInput = useRef();
+  useEffect(() => {
+    firstInput.current.focus();
+  }, [])
 
   const initialValues = {
     username: '',
@@ -70,6 +75,7 @@ const Login = () => {
                   <Form className='col-12 col-md-6 mt-3 mt-mb-0'>
                     <h1 className='text-center mb-4'>{t('authorization.login')}</h1>
                     <TextField
+                      ref={firstInput}
                       name='username'
                       placeholder={t('placeholders.username_ph')}
                       // error и errorMessage разделены для изменения стиля инпута без появления текста ошибки для submit ошибок

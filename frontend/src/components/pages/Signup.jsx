@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { object, string, ref } from 'yup';
 import {
@@ -18,6 +18,11 @@ const Signup = () => {
   const navigate = useNavigate();
   const { onSignup } = useAuth();
   const [ authError, setAuthError ] = useState();
+  const firstInput = useRef(null);
+
+  useEffect(() => {
+    firstInput.current.focus()
+  }, [])
 
   const initialValues = {
     username: '',
@@ -77,6 +82,7 @@ const Signup = () => {
                   <Form className='col-12 col-md-6 mt-3 mt-mb-0'>
                     <h1 className='text-center mb-4'>{t('authorization.signup')}</h1>
                     <TextField
+                      ref={firstInput}
                       name='username'
                       placeholder={t('placeholders.username_reg_ph')}
                       error={authError || errors.username}
