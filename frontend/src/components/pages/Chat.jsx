@@ -41,7 +41,7 @@ const Chat = () => {
     );
   }
   return (
-    <div className='h-100 d-flex justify-content-center align-items-center'>
+    <div className="h-100 d-flex justify-content-center align-items-center">
       <Spinner animation="border" variant="primary" />
     </div>
   );
