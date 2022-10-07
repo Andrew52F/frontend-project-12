@@ -2,17 +2,17 @@
 import React, { forwardRef } from 'react';
 import { FormGroup, FloatingLabel, Form } from 'react-bootstrap';
 
-function TextField(props, ref) {
+const TextField = (props, ref) => {
   const {
     name, value, placeholder, error, errorMessage, handleChange, handleBlur, touched,
   } = props;
-  
+
   return (
-    <FormGroup className='mb-3'>
+    <FormGroup className="mb-3">
       <FloatingLabel
         controlId={name}
         label={placeholder}
-        className='mb-3'
+        className="mb-3"
       >
         <Form.Control
           ref={ref}
@@ -22,18 +22,18 @@ function TextField(props, ref) {
           value={value}
           type={name === 'password' || name === 'passwordConfirmation' ? 'password' : null}
           required
-          placeholder='ник'
+          placeholder="ник"
           onChange={handleChange}
           onBlur={handleBlur}
         />
 
-        {error && touched && errorMessage && (<div className='invalid-tooltip'>{errorMessage}</div>) }
+        {error && touched && errorMessage && (<div className="invalid-tooltip">{errorMessage}</div>) }
       </FloatingLabel>
     </FormGroup>
   );
-}
+};
 TextField.defaultProps = {
-  focus: false
+  focus: false,
 };
 
 export default forwardRef(TextField);

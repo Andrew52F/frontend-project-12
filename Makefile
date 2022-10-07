@@ -16,7 +16,7 @@ start:
 deploy:
 	git push heroku main
 
-lint-frontend:
+lint:
 	make -C frontend lint
 test-e2e:
 	make start & npx playwright test --trace on

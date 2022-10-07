@@ -1,22 +1,23 @@
+/* eslint-disable import/no-anonymous-default-export */
 export default {
   translation: {
     modals: {
       headers: {
         add: 'Добавить канал',
         remove: 'Удалить канал',
-        rename: 'Переименовать канал'
+        rename: 'Переименовать канал',
       },
       body: {
         confirmation: 'Уверены?',
-        channel_name_label: 'Имя канала'
+        channel_name_label: 'Имя канала',
       },
       buttons: {
         send: 'Отправить',
         decline: 'Отклонить',
         remove: 'Удалить',
         rename: 'Переименовать',
-        controle_channel: 'Управление каналом'
-      }
+        controle_channel: 'Управление каналом',
+      },
     },
     chat: {
       channels: 'Каналы',
@@ -62,7 +63,7 @@ export default {
       go_to_main_page: {
         text: 'Но вы можете перейти',
         link: 'на главную страницу',
-      }
-  },
+      },
+    },
   },
 };
