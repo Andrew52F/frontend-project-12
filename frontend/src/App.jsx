@@ -12,8 +12,8 @@ import NotFoundPage from './components/pages/NotFoundPage';
 import NavBar from './components/NavBar';
 import 'bootstrap/dist/css/bootstrap.css';
 import './index.css';
-import Providers from './init';
 import 'react-toastify/dist/ReactToastify.css';
+import routes from './routes';
 
 const ProtectedRoute = ({ children }) => {
   const { isLoggedIn } = useAuth();
@@ -21,27 +21,25 @@ const ProtectedRoute = ({ children }) => {
 };
 
 const App = () => (
-  <Providers>
-    <MainContainer>
-      <NavBar />
-      <BrowserRouter>
-        <Routes>
-          <Route
-            path="/"
-            element={(
-              <ProtectedRoute>
-                <Chat />
-              </ProtectedRoute>
+  <MainContainer>
+    <NavBar />
+    <BrowserRouter>
+      <Routes>
+        <Route
+          path={routes.root}
+          element={(
+            <ProtectedRoute>
+              <Chat />
+            </ProtectedRoute>
           )}
-          />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="*" element={<NotFoundPage />} />
-        </Routes>
-      </BrowserRouter>
-      <ToastContainer />
-    </MainContainer>
-  </Providers>
+        />
+        <Route path={routes.login} element={<Login />} />
+        <Route path={routes.signup} element={<Signup />} />
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
+    </BrowserRouter>
+    <ToastContainer />
+  </MainContainer>
 );
 
 export default App;

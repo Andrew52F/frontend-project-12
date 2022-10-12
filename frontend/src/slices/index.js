@@ -10,5 +10,4 @@ const store = configureStore({
     modals: modalsReducer,
   },
 });
-console.log(store);
 export default store;

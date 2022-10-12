@@ -19,7 +19,6 @@ const messagesSlice = createSlice({
       .addCase(channelsActions.removeChannel, (state, { payload }) => {
         const remainingMessages = Object.values(state.entities)
           .filter(({ channelId }) => channelId !== payload);
-        console.log(remainingMessages);
         messagesAdapter.setAll(state, remainingMessages);
       });
   },

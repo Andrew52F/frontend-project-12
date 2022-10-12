@@ -31,7 +31,6 @@ const Login = () => {
     password: string().required(t('validation_errors.is_required')),
   });
   const handleSubmit = async (values) => {
-    console.log(values);
     try {
       await onLogin(values);
       navigate('/');

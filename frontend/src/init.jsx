@@ -7,17 +7,15 @@ import AuthProvider from './components/providers/AuthProvider';
 import ChatApiProvider from './components/providers/ChatApiProvider';
 import resources from './locales/index';
 import store from './slices/index';
-import initSocket from './websocket';
+import App from './App';
 
-const Providers = ({ children }) => {
+const init = (socket) => {
   i18n
     .use(initReactI18next)
     .init({
       resources,
-      debug: true,
       lng: 'ru',
     });
-  const api = initSocket();
 
   const rollbarConfig = {
     accessToken: process.env.ROLLBAR_TOKEN,
@@ -34,8 +32,8 @@ const Providers = ({ children }) => {
       <I18nextProvider i18n={i18n}>
         <StoreProvider store={store}>
           <AuthProvider>
-            <ChatApiProvider api={api}>
-              { children }
+            <ChatApiProvider api={socket}>
+              <App />
             </ChatApiProvider>
           </AuthProvider>
         </StoreProvider>
@@ -44,4 +42,4 @@ const Providers = ({ children }) => {
   );
 };
 
-export default Providers;
+export default init;

@@ -7,6 +7,7 @@ const AuthContext = createContext(null);
 const AuthProvider = ({ children }) => {
   const authData = JSON.parse(localStorage.getItem('authtoken'));
   const [isLoggedIn, setLoggedIn] = useState(!!authData?.token);
+  const [username, setUsername] = useState(authData?.username);
 
   const onAuth = async (values, type) => {
     try {
@@ -14,15 +15,13 @@ const AuthProvider = ({ children }) => {
       const authDat = response.data;
       const { status } = response;
       localStorage.setItem('authtoken', JSON.stringify({ token: authDat.token, username: authDat.username }));
+      setUsername(authDat.username);
       setLoggedIn(true);
-      console.log(`Auth success! Status:${status}`);
       return {
         status,
       };
     } catch (e) {
       const errorCode = e.response.status;
-      console.log(values);
-      console.error(`Auth error. Status: ${errorCode}`);
       throw new Error(errorCode);
     }
   };
@@ -38,6 +37,7 @@ const AuthProvider = ({ children }) => {
     : {});
 
   const value = {
+    username,
     isLoggedIn,
     getAuthHeader,
     onLogin,

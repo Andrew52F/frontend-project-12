@@ -1,6 +1,7 @@
 /* eslint-disable import/no-anonymous-default-export */
 export default {
   translation: {
+    logo: 'Hexlet Chat',
     modals: {
       headers: {
         add: 'Добавить канал',
@@ -36,7 +37,7 @@ export default {
     authorization: {
       login: 'Войти',
       signup: 'Регистрация',
-      signup_btn: 'Зарегестрироваться',
+      signup_btn: 'Зарегистрироваться',
       logout: 'Выйти',
     },
     placeholders: {

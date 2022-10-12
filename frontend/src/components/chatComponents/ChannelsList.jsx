@@ -10,15 +10,12 @@ import { getAllChannels, getCurrentChannelId } from '../../slices/selectors';
 import { actions } from '../../slices/channelsSlice';
 import { openModal } from '../../slices/modalsSlice';
 
-filter.add(filter.getDictionary('ru'));
-
 const ChannelsList = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const channels = useSelector((state) => getAllChannels(state));
   const currentChannelId = useSelector((state) => getCurrentChannelId(state));
   const showModal = (type, id) => () => {
-    console.log(type);
     dispatch(openModal({ type, id }));
   };
 

@@ -7,12 +7,12 @@ import { useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 
 import { useChatApi } from '../providers/ChatApiProvider';
+import { useAuth } from '../providers/AuthProvider';
 
 const MessageField = () => {
   const { t } = useTranslation();
-
+  const { username } = useAuth();
   const currentChannelId = useSelector((state) => state.channels.currentChannelId);
-  const { username } = JSON.parse(localStorage.getItem('authtoken'));
   const { sendMessage } = useChatApi();
 
   const inputRef = useRef(null);

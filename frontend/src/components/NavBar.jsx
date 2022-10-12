@@ -15,7 +15,7 @@ const NavBar = () => {
       className="shadow-sm"
     >
       <Container>
-        <Navbar.Brand href="/">Hexlet Chat</Navbar.Brand>
+        <Navbar.Brand href="/">{t('logo')}</Navbar.Brand>
         {isLoggedIn && (
         <Button
           onClick={onLogout}
