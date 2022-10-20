@@ -7,7 +7,7 @@
 
 
 Четвертый учебный frontend проект на JavaScript - "Чат"<br>
-Используемые технологии: React, Redux Toolkit, Webpack.<br>
+Используемые технологии: React, Redux Toolkit, Bootstrap, Socket.io, JWT.<br>
 [Демонстрационная версия](https://frontend-chat-1.herokuapp.com/)
 
 ---
